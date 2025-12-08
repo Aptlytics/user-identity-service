@@ -23,7 +23,6 @@ public class ApiInfoController {
                 .running(true)
                 .serviceName("auth-service")
                 .build();
-
         return getResponse(true, info, Collections.emptyList());
     }
 
