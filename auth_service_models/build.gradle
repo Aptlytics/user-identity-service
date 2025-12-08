@@ -32,7 +32,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/ammad-qureshi-dev/aptlytics-user-identity-service")
+            url = uri("https://maven.pkg.github.com/Aptlytics/user-identity-service")
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("APTLYTICS_USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("APTLYTICS_GITHUB_ACCESS_TOKEN")
