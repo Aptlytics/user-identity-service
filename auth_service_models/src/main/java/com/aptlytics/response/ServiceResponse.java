@@ -1,6 +1,7 @@
 package com.aptlytics.response;
 
 import lombok.*;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,6 +26,23 @@ public class ServiceResponse<T> {
 
     @Builder.Default
     private List<? extends RuntimeException> exceptions = new ArrayList<>();
+
+    public static <T> ResponseEntity<ServiceResponse<T>> getResponse(
+            boolean isSuccess, T data, List<? extends RuntimeException> exceptions, HttpHeaders headers
+    ) {
+        if (exceptions == null) {
+            exceptions = new ArrayList<>();
+        }
+
+        var response = ServiceResponse.<T>builder()
+                .success(isSuccess)
+                .data(data)
+                .exceptions(exceptions)
+                .build();
+
+        return new ResponseEntity<>(response, headers, getHttpStatusCode(isSuccess));
+    }
+
 
     public static <T> ResponseEntity<ServiceResponse<T>> getResponse(
             boolean isSuccess,
